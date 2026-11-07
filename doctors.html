@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors & Medical Staff - JahidPulse - Care and Patient Management System</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 antialiased flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand & Logo -->
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-2.5">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-teal-500/25">
+                            <i class="fa-solid fa-heart-pulse text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-lg font-bold tracking-tight text-slate-900 block leading-tight">Jahid<span class="text-teal-600">Pulse</span></span>
+                            <span class="text-[10px] font-medium text-slate-500 tracking-wider uppercase block">Care & PMS</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-1">
+                    <a href="index.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-xs"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="patients.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-hospital-user text-xs"></i>
+                        <span>Patients</span>
+                    </a>
+                    <a href="appointments.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-xs"></i>
+                        <span>Appointments</span>
+                    </a>
+                    <a href="records.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-file-medical text-xs"></i>
+                        <span>EHR & Records</span>
+                    </a>
+                    <a href="billing.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-xs"></i>
+                        <span>Billing</span>
+                    </a>
+                    <a href="doctors.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-user-doctor text-xs"></i>
+                        <span>Doctors</span>
+                    </a>
+                </nav>
+
+                <!-- Actions: Notifications, Profile, Mobile Menu -->
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <button id="notif-btn" class="w-9 h-9 rounded-lg border border-slate-200 text-slate-600 hover:text-teal-600 hover:border-slate-300 flex items-center justify-center transition relative">
+                            <i class="fa-regular fa-bell text-sm"></i>
+                            <span id="notif-count" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center">0</span>
+                        </button>
+                        
+                        <div id="notif-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-slate-100 z-50 overflow-hidden">
+                            <div class="p-3.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-800 uppercase tracking-wider">Hospital Alerts</span>
+                                <button id="mark-all-read" class="text-[11px] text-teal-600 hover:underline font-medium">Mark all read</button>
+                            </div>
+                            <div id="notif-list" class="max-h-72 overflow-y-auto divide-y divide-slate-100"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 pl-2 border-l border-slate-200">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' rx='20' fill='%230d9488'/><text x='50%' y='54%' font-size='34' font-family='Arial,sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'>JF</text></svg>" alt="Dr. Jahid Farhaan" class="w-8 h-8 rounded-full object-cover ring-2 ring-teal-500/20">
+                        <div class="hidden xl:block text-left">
+                            <p class="text-xs font-bold text-slate-800 leading-none">Dr. Jahid Farhaan</p>
+                            <span class="text-[10px] text-slate-400 font-medium">Chief Medical Officer</span>
+                        </div>
+                    </div>
+
+                    <button id="mobile-menu-btn" class="md:hidden w-9 h-9 rounded-lg border border-slate-200 text-slate-600 flex items-center justify-center">
+                        <i class="fa-solid fa-bars text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-1">
+            <a href="index.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Dashboard</a>
+            <a href="patients.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Patients Directory</a>
+            <a href="appointments.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Appointments</a>
+            <a href="records.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">EHR & Prescriptions</a>
+            <a href="billing.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Billing & Claims</a>
+            <a href="doctors.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Doctors & Staff</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-1">
+                    <a href="index.html" class="hover:text-teal-600">Home</a>
+                    <span>/</span>
+                    <span class="text-teal-600 font-bold">Medical Staff</span>
+                </div>
+                <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Doctors & Specialist Physicians</h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Specialties, duty schedules, consultation rooms, and on-call availability at JahidPulse.</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <a href="appointments.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm transition shadow-sm">
+                    <i class="fa-solid fa-calendar-check text-xs"></i>
+                    <span>Consultation Queue</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <div class="relative flex-1">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                <input type="text" id="doctor-search-input" oninput="renderDoctorsList()" placeholder="Search doctors by name, specialty, or room..." class="w-full pl-9 pr-4 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition">
+            </div>
+
+            <!-- Specialty Filter -->
+            <div class="flex items-center gap-2">
+                <select id="doctor-specialty-filter" onchange="renderDoctorsList()" class="px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <option value="">All Specialties</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Internal Medicine">Internal Medicine</option>
+                    <option value="Dermatology">Dermatology</option>
+                </select>
+
+                <!-- Status Filter -->
+                <select id="doctor-status-filter" onchange="renderDoctorsList()" class="px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <option value="">All Statuses</option>
+                    <option value="Available">Available</option>
+                    <option value="In Surgery">In Surgery</option>
+                    <option value="On Break">On Break</option>
+                    <option value="Off Duty">Off Duty</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Doctors Cards Grid -->
+        <div id="doctors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated via JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="no-doctors-found" class="hidden bg-white rounded-2xl border border-slate-200/80 p-12 text-center shadow-sm">
+            <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3 text-lg">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <h3 class="text-sm font-bold text-slate-800">No physicians found</h3>
+            <p class="text-xs text-slate-400 mt-1">Try resetting the specialty or availability filters.</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-800">JahidPulse PMS</span> &bull; <span>Physician & Specialist Roster</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="hover:text-teal-600">Dashboard</a>
+                <a href="patients.html" class="hover:text-teal-600">Patients</a>
+                <a href="appointments.html" class="hover:text-teal-600">Appointments</a>
+                <a href="records.html" class="hover:text-teal-600">EHR</a>
+                <a href="billing.html" class="hover:text-teal-600">Billing</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/store.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDoctorsList();
+        });
+
+        function renderDoctorsList() {
+            const store = window.JahidPulseStore || window.CarePulseStore;
+            const doctors = store.getDoctors();
+            const searchVal = (document.getElementById('doctor-search-input').value || '').toLowerCase().trim();
+            const specialtyFilter = document.getElementById('doctor-specialty-filter').value;
+            const statusFilter = document.getElementById('doctor-status-filter').value;
+
+            const filtered = doctors.filter(doc => {
+                const matchesSearch = !searchVal || 
+                    doc.name.toLowerCase().includes(searchVal) || 
+                    doc.specialty.toLowerCase().includes(searchVal) || 
+                    doc.room.toLowerCase().includes(searchVal);
+
+                const matchesSpecialty = !specialtyFilter || doc.specialty === specialtyFilter;
+                const matchesStatus = !statusFilter || doc.status === statusFilter;
+
+                return matchesSearch && matchesSpecialty && matchesStatus;
+            });
+
+            const grid = document.getElementById('doctors-grid');
+            const noDocs = document.getElementById('no-doctors-found');
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noDocs.classList.remove('hidden');
+                return;
+            }
+
+            noDocs.classList.add('hidden');
+            grid.innerHTML = filtered.map(doc => {
+                let statusBadge = 'bg-emerald-100 text-emerald-800';
+                let dotColor = 'bg-emerald-500';
+
+                if (doc.status === 'In Surgery') {
+                    statusBadge = 'bg-rose-100 text-rose-800';
+                    dotColor = 'bg-rose-500';
+                } else if (doc.status === 'On Break') {
+                    statusBadge = 'bg-amber-100 text-amber-800';
+                    dotColor = 'bg-amber-500';
+                } else if (doc.status === 'Off Duty') {
+                    statusBadge = 'bg-slate-100 text-slate-700';
+                    dotColor = 'bg-slate-400';
+                }
+
+                return `
+                    <div class="stat-card bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 flex flex-col justify-between">
+                        <div>
+                            <!-- Header: Image, Status, Rating -->
+                            <div class="flex items-start justify-between gap-4">
+                                <div class="flex items-center gap-3.5">
+                                    <img src="${doc.avatar}" alt="${doc.name}" class="w-14 h-14 rounded-2xl object-cover ring-2 ring-slate-100 shadow-sm">
+                                    <div>
+                                        <h3 class="text-base font-bold text-slate-900 leading-tight">${doc.name}</h3>
+                                        <span class="text-xs font-semibold text-teal-600 block mt-0.5">${doc.specialty}</span>
+                                        <span class="text-[11px] text-slate-400 font-medium block">${doc.degree}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Status Badge & Ratings -->
+                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-bold text-[10px] uppercase tracking-wider ${statusBadge}">
+                                    <span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span>
+                                    ${doc.status}
+                                </span>
+                                <div class="flex items-center gap-1 text-amber-500 font-bold">
+                                    <i class="fa-solid fa-star text-[11px]"></i>
+                                    <span class="text-slate-800 text-xs">${doc.rating}</span>
+                                    <span class="text-slate-400 font-normal">(${doc.experience})</span>
+                                </div>
+                            </div>
+
+                            <!-- Clinic Details -->
+                            <div class="mt-4 space-y-2 bg-slate-50 p-3.5 rounded-xl border border-slate-100 text-xs text-slate-600">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-slate-400 w-4 text-center"></i>
+                                    <span>${doc.room}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-clock text-slate-400 w-4 text-center"></i>
+                                    <span>${doc.shift}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-phone text-slate-400 w-4 text-center"></i>
+                                    <span class="font-mono">${doc.phone}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Actions -->
+                        <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+                            <a href="patients.html" class="text-xs font-semibold text-slate-600 hover:text-slate-900">
+                                Assigned Patients (${doc.patientsCount})
+                            </a>
+                            <a href="appointments.html?action=book&doctorId=${doc.id}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-xs shadow-sm transition">
+                                <i class="fa-regular fa-calendar-plus"></i>
+                                <span>Book Consult</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>

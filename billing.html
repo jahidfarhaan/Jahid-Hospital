@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Billing & Insurance - JahidPulse - Care and Patient Management System</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 antialiased flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand & Logo -->
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-2.5">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-teal-500/25">
+                            <i class="fa-solid fa-heart-pulse text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-lg font-bold tracking-tight text-slate-900 block leading-tight">Jahid<span class="text-teal-600">Pulse</span></span>
+                            <span class="text-[10px] font-medium text-slate-500 tracking-wider uppercase block">Care & PMS</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-1">
+                    <a href="index.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-xs"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="patients.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-hospital-user text-xs"></i>
+                        <span>Patients</span>
+                    </a>
+                    <a href="appointments.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-xs"></i>
+                        <span>Appointments</span>
+                    </a>
+                    <a href="records.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-file-medical text-xs"></i>
+                        <span>EHR & Records</span>
+                    </a>
+                    <a href="billing.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-xs"></i>
+                        <span>Billing</span>
+                    </a>
+                    <a href="doctors.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-user-doctor text-xs"></i>
+                        <span>Doctors</span>
+                    </a>
+                </nav>
+
+                <!-- Actions: Notifications, Profile, Mobile Menu -->
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <button id="notif-btn" class="w-9 h-9 rounded-lg border border-slate-200 text-slate-600 hover:text-teal-600 hover:border-slate-300 flex items-center justify-center transition relative">
+                            <i class="fa-regular fa-bell text-sm"></i>
+                            <span id="notif-count" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center">0</span>
+                        </button>
+                        
+                        <div id="notif-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-slate-100 z-50 overflow-hidden">
+                            <div class="p-3.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-800 uppercase tracking-wider">Hospital Alerts</span>
+                                <button id="mark-all-read" class="text-[11px] text-teal-600 hover:underline font-medium">Mark all read</button>
+                            </div>
+                            <div id="notif-list" class="max-h-72 overflow-y-auto divide-y divide-slate-100"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 pl-2 border-l border-slate-200">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' rx='20' fill='%230d9488'/><text x='50%' y='54%' font-size='34' font-family='Arial,sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'>JF</text></svg>" alt="Dr. Jahid Farhaan" class="w-8 h-8 rounded-full object-cover ring-2 ring-teal-500/20">
+                        <div class="hidden xl:block text-left">
+                            <p class="text-xs font-bold text-slate-800 leading-none">Dr. Jahid Farhaan</p>
+                            <span class="text-[10px] text-slate-400 font-medium">Chief Medical Officer</span>
+                        </div>
+                    </div>
+
+                    <button id="mobile-menu-btn" class="md:hidden w-9 h-9 rounded-lg border border-slate-200 text-slate-600 flex items-center justify-center">
+                        <i class="fa-solid fa-bars text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-1">
+            <a href="index.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Dashboard</a>
+            <a href="patients.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Patients Directory</a>
+            <a href="appointments.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Appointments</a>
+            <a href="records.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">EHR & Prescriptions</a>
+            <a href="billing.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Billing & Claims</a>
+            <a href="doctors.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Doctors & Staff</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-1">
+                    <a href="index.html" class="hover:text-teal-600">Home</a>
+                    <span>/</span>
+                    <span class="text-teal-600 font-bold">Billing & Invoices</span>
+                </div>
+                <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Patient Invoices & Insurance Claims</h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Manage inpatient hospital bills, insurance adjudication, and payment receipts in JahidPulse.</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button onclick="openModal('create-invoice-modal')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm transition shadow-lg shadow-teal-600/20">
+                    <i class="fa-solid fa-plus text-xs"></i>
+                    <span>Generate New Invoice</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Financial Summary Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <!-- Total Billed -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Total Billed</span>
+                    <p id="bill-stat-total" class="text-2xl font-extrabold text-slate-900 mt-0.5">$10,910</p>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-file-invoice"></i>
+                </div>
+            </div>
+
+            <!-- Insurance Claimed -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-500">Insurance Covered</span>
+                    <p id="bill-stat-insurance" class="text-2xl font-extrabold text-slate-900 mt-0.5">$9,278</p>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-shield-heart"></i>
+                </div>
+            </div>
+
+            <!-- Patient Balance Due -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-amber-500">Patient Due</span>
+                    <p id="bill-stat-due" class="text-2xl font-extrabold text-slate-900 mt-0.5">$1,632</p>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                </div>
+            </div>
+
+            <!-- Overdue Balances -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-rose-500">Overdue Invoices</span>
+                    <p id="bill-stat-overdue" class="text-2xl font-extrabold text-slate-900 mt-0.5">1</p>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoices Master Table -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col">
+            <div class="p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <h2 class="text-base font-bold text-slate-900">Hospital Billing Records</h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Adjudicated claims with insurers and patient copay balances</p>
+                </div>
+
+                <!-- Status Filter -->
+                <select id="invoice-status-filter" onchange="renderInvoicesTable()" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-teal-500">
+                    <option value="">All Invoices</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Overdue">Overdue</option>
+                </select>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50/70 border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                            <th class="py-3.5 px-4">Invoice ID</th>
+                            <th class="py-3.5 px-4">Patient Profile</th>
+                            <th class="py-3.5 px-4">Insurance Provider</th>
+                            <th class="py-3.5 px-4">Subtotal</th>
+                            <th class="py-3.5 px-4">Ins. Covered</th>
+                            <th class="py-3.5 px-4">Patient Balance</th>
+                            <th class="py-3.5 px-4">Status</th>
+                            <th class="py-3.5 px-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoices-tbody" class="divide-y divide-slate-100 text-sm">
+                        <!-- Dynamic rows -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="no-invoices-found" class="hidden py-12 text-center">
+                <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3 text-lg">
+                    <i class="fa-solid fa-receipt"></i>
+                </div>
+                <h3 class="text-sm font-bold text-slate-800">No invoices match criteria</h3>
+                <p class="text-xs text-slate-400 mt-1">Adjust filters or generate a new patient invoice.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Create Invoice Modal -->
+    <div id="create-invoice-modal" class="hidden fixed inset-0 z-50 overflow-y-auto modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div>
+                    <h3 class="text-base font-bold text-slate-900">Create Patient Hospital Bill</h3>
+                    <p class="text-xs text-slate-400">Generate itemized statement with insurance split</p>
+                </div>
+                <button onclick="closeModal('create-invoice-modal')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleCreateInvoice(event)" class="mt-4 space-y-3.5">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Select Patient *</label>
+                    <select id="invoice-patient-select" name="patientId" required class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                        <!-- Dynamic -->
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Insurance Carrier *</label>
+                    <select name="insuranceProvider" required class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                        <option value="BlueCross BlueShield">BlueCross BlueShield</option>
+                        <option value="Aetna Health Advantage">Aetna Health Advantage</option>
+                        <option value="United Healthcare">United Healthcare</option>
+                        <option value="Cigna Global">Cigna Global</option>
+                        <option value="Medicare Part B">Medicare Part B</option>
+                        <option value="Self-Pay / Private">Self-Pay / None</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Primary Procedure / Item *</label>
+                        <input type="text" name="itemDescription" required placeholder="e.g. Inpatient Admission (3 days)" class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Total Fee Amount ($) *</label>
+                        <input type="number" id="calc-subtotal" name="subtotal" required step="10" placeholder="1200" oninput="calculateInsuranceSplit()" class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500">
+                    </div>
+                </div>
+
+                <!-- Auto Calculation Display -->
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs space-y-1.5">
+                    <div class="flex justify-between text-slate-500">
+                        <span>Insurance Adjudication (85%):</span>
+                        <span id="calc-insurance-text" class="font-bold text-emerald-600">$0.00</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-slate-800 pt-1 border-t border-slate-200">
+                        <span>Patient Out-of-Pocket Due (15%):</span>
+                        <span id="calc-patient-text" class="text-teal-600">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('create-invoice-modal')" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 rounded-xl">Cancel</button>
+                    <button type="submit" class="px-5 py-2 text-xs font-semibold bg-teal-600 hover:bg-teal-500 text-white rounded-xl shadow-lg shadow-teal-600/20">Generate Bill</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Printable Receipt Modal -->
+    <div id="receipt-modal" class="hidden fixed inset-0 z-50 overflow-y-auto modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 relative">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 no-print">
+                <span class="text-xs font-bold text-slate-400 uppercase">Hospital Receipt Preview</span>
+                <button onclick="closeModal('receipt-modal')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Receipt Content -->
+            <div id="receipt-content-area" class="mt-4 p-4 border border-slate-200 rounded-xl bg-white space-y-4 text-xs font-mono">
+                <!-- Dynamically populated -->
+            </div>
+
+            <div class="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 no-print">
+                <button onclick="closeModal('receipt-modal')" class="px-4 py-1.5 text-xs font-semibold text-slate-600">Close</button>
+                <button onclick="window.print()" class="px-4 py-1.5 bg-teal-600 text-white text-xs font-semibold rounded-xl hover:bg-teal-500 flex items-center gap-1.5">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Print Receipt</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-auto no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-800">JahidPulse PMS</span> &bull; <span>Hospital Revenue Cycle & Claims Module</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="hover:text-teal-600">Dashboard</a>
+                <a href="patients.html" class="hover:text-teal-600">Patients</a>
+                <a href="appointments.html" class="hover:text-teal-600">Appointments</a>
+                <a href="records.html" class="hover:text-teal-600">EHR</a>
+                <a href="doctors.html" class="hover:text-teal-600">Doctors</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/store.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            populatePatientSelect();
+            renderInvoicesTable();
+        });
+
+        function populatePatientSelect() {
+            const store = window.JahidPulseStore || window.CarePulseStore;
+            const patients = store.getPatients();
+            const select = document.getElementById('invoice-patient-select');
+            if (select) {
+                select.innerHTML = patients.map(p => `
+                    <option value="${p.id}">${p.name} (${p.id})</option>
+                `).join('');
+            }
+        }
+
+        function calculateInsuranceSplit() {
+            const total = parseFloat(document.getElementById('calc-subtotal').value) || 0;
+            const covered = (total * 0.85).toFixed(2);
+            const due = (total * 0.15).toFixed(2);
+
+            document.getElementById('calc-insurance-text').textContent = `$${covered}`;
+            document.getElementById('calc-patient-text').textContent = `$${due}`;
+        }
+
+        function renderInvoicesTable() {
+            const store = window.JahidPulseStore || window.CarePulseStore;
+            const invoices = store.getInvoices();
+            const statusFilter = document.getElementById('invoice-status-filter').value;
+
+            // Summary Stats
+            const totalBilled = invoices.reduce((acc, i) => acc + (i.subtotal || 0), 0);
+            const totalIns = invoices.reduce((acc, i) => acc + (i.insuranceCovered || 0), 0);
+            const totalDue = invoices.reduce((acc, i) => acc + (i.patientDue || 0), 0);
+            const overdueCount = invoices.filter(i => i.status === 'Overdue').length;
+
+            document.getElementById('bill-stat-total').textContent = `$${totalBilled.toLocaleString()}`;
+            document.getElementById('bill-stat-insurance').textContent = `$${totalIns.toLocaleString()}`;
+            document.getElementById('bill-stat-due').textContent = `$${totalDue.toLocaleString()}`;
+            document.getElementById('bill-stat-overdue').textContent = overdueCount;
+
+            const filtered = invoices.filter(i => !statusFilter || i.status === statusFilter);
+
+            const tbody = document.getElementById('invoices-tbody');
+            const noInvoices = document.getElementById('no-invoices-found');
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                noInvoices.classList.remove('hidden');
+                return;
+            }
+
+            noInvoices.classList.add('hidden');
+            tbody.innerHTML = filtered.map(i => {
+                let badgeClass = 'bg-amber-100 text-amber-800';
+                if (i.status === 'Paid') badgeClass = 'bg-emerald-100 text-emerald-800';
+                if (i.status === 'Overdue') badgeClass = 'bg-rose-100 text-rose-800';
+
+                return `
+                    <tr class="table-hover-row border-b border-slate-100 transition">
+                        <td class="py-3.5 px-4 font-mono font-bold text-slate-800 text-xs">
+                            ${i.id}
+                            <span class="block text-[10px] text-slate-400 font-sans font-normal">${i.date}</span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <a href="patient-details.html?id=${i.patientId}" class="font-bold text-slate-900 hover:text-teal-600 block text-xs">
+                                ${i.patientName}
+                            </a>
+                            <span class="text-[10px] text-slate-400 font-mono">${i.patientId}</span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <span class="text-xs text-slate-700 font-medium">${i.insuranceProvider || 'BlueCross'}</span>
+                        </td>
+                        <td class="py-3.5 px-4 font-mono text-xs font-semibold text-slate-900">
+                            $${(i.subtotal || 0).toFixed(2)}
+                        </td>
+                        <td class="py-3.5 px-4 font-mono text-xs text-emerald-600 font-medium">
+                            $${(i.insuranceCovered || 0).toFixed(2)}
+                        </td>
+                        <td class="py-3.5 px-4 font-mono text-xs font-bold text-slate-900">
+                            $${(i.patientDue || 0).toFixed(2)}
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${badgeClass}">
+                                ${i.status}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right">
+                            <div class="flex items-center justify-end gap-1.5">
+                                <button onclick="viewReceipt('${i.id}')" class="px-2.5 py-1 text-xs font-semibold text-teal-600 hover:bg-teal-50 rounded-lg border border-teal-200 transition" title="View Statement">
+                                    Receipt
+                                </button>
+                                ${i.status !== 'Paid' ? `
+                                    <button onclick="markAsPaid('${i.id}')" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold transition" title="Mark Settled">
+                                        Mark Paid
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function markAsPaid(invoiceId) {
+            const store = window.JahidPulseStore || window.CarePulseStore;
+            store.updateInvoiceStatus(invoiceId, 'Paid');
+            renderInvoicesTable();
+            showToast(`Invoice ${invoiceId} marked as fully settled`, 'success', 'Payment Received');
+        }
+
+        function viewReceipt(invoiceId) {
+            const store = window.JahidPulseStore || window.CarePulseStore;
+            const invoice = store.getInvoices().find(i => i.id === invoiceId);
+            if (!invoice) return;
+
+            const itemsHtml = (invoice.items || [
+                { description: 'Hospital General Clinical Care', amount: invoice.subtotal }
+            ]).map(item => `
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                    <span>${item.description}</span>
+                    <span class="font-bold">$${item.amount.toFixed(2)}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('receipt-content-area').innerHTML = `
+                <div class="text-center pb-3 border-b border-dashed border-slate-300">
+                    <h3 class="font-extrabold text-sm text-slate-900">JAHIDPULSE CARE HEALTH SYSTEM</h3>
+                    <p class="text-[10px] text-slate-500">Hospital Billing & Financial Services</p>
+                    <p class="text-[10px] text-slate-400 mt-1">Tax ID: 94-2819021 &bull; Phone: (555) 019-2830</p>
+                </div>
+
+                <div class="flex justify-between text-[11px] pt-1">
+                    <div>
+                        <span class="text-slate-400 block">Billed To:</span>
+                        <span class="font-bold text-slate-900">${invoice.patientName} (${invoice.patientId})</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-slate-400 block">Invoice No:</span>
+                        <span class="font-bold text-slate-900">${invoice.id}</span>
+                        <span class="text-[10px] text-slate-400 block">${invoice.date}</span>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Itemized Charges:</span>
+                    <div class="space-y-1">${itemsHtml}</div>
+                </div>
+
+                <div class="pt-3 border-t border-slate-200 space-y-1">
+                    <div class="flex justify-between text-slate-500">
+                        <span>Total Hospital Charges:</span>
+                        <span class="font-bold text-slate-900">$${(invoice.subtotal || 0).toFixed(2)}</span>
+                    </div>
+                    <div class="flex justify-between text-emerald-600">
+                        <span>${invoice.insuranceProvider || 'Insurance'} Paid:</span>
+                        <span class="font-bold">-$${(invoice.insuranceCovered || 0).toFixed(2)}</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-extrabold text-slate-900 pt-2 border-t border-dashed border-slate-300">
+                        <span>Patient Net Balance:</span>
+                        <span>$${(invoice.patientDue || 0).toFixed(2)}</span>
+                    </div>
+                </div>
+
+                <div class="text-center pt-3 border-t border-slate-100 text-[10px] text-slate-400">
+                    Status: <span class="font-bold uppercase text-slate-800">${invoice.status}</span> &bull; Thank you for choosing JahidPulse Health.
+                </div>
+            `;
+
+            openModal('receipt-modal');
+        }
+
+        function handleCreateInvoice(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+
+            const patientId = formData.get('patientId');
+            const store = window.JahidPulseStore || window.CarePulseStore;
+            const patient = store.getPatient(patientId);
+            const subtotal = parseFloat(formData.get('subtotal')) || 0;
+            const covered = subtotal * 0.85;
+            const due = subtotal * 0.15;
+
+            const newInvoice = {
+                patientId: patientId,
+                patientName: patient ? patient.name : 'Unknown Patient',
+                insuranceProvider: formData.get('insuranceProvider'),
+                dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                items: [
+                    { description: formData.get('itemDescription') || 'Hospital Services', amount: subtotal }
+                ],
+                subtotal: subtotal,
+                insuranceCovered: covered,
+                patientDue: due
+            };
+
+            store.addInvoice(newInvoice);
+            closeModal('create-invoice-modal');
+            form.reset();
+            renderInvoicesTable();
+            showToast(`Invoice generated for ${newInvoice.patientName}`, 'success', 'Invoice Created');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients Directory - JahidPulse - Care and Patient Management System</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 antialiased flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand & Logo -->
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-2.5">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-teal-500/25">
+                            <i class="fa-solid fa-heart-pulse text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-lg font-bold tracking-tight text-slate-900 block leading-tight">Jahid<span class="text-teal-600">Pulse</span></span>
+                            <span class="text-[10px] font-medium text-slate-500 tracking-wider uppercase block">Care & PMS</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-1">
+                    <a href="index.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-xs"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="patients.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-hospital-user text-xs"></i>
+                        <span>Patients</span>
+                    </a>
+                    <a href="appointments.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-xs"></i>
+                        <span>Appointments</span>
+                    </a>
+                    <a href="records.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-file-medical text-xs"></i>
+                        <span>EHR & Records</span>
+                    </a>
+                    <a href="billing.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-xs"></i>
+                        <span>Billing</span>
+                    </a>
+                    <a href="doctors.html" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-user-doctor text-xs"></i>
+                        <span>Doctors</span>
+                    </a>
+                </nav>
+
+                <!-- Actions: Search, Notifications, Profile, Mobile Menu -->
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <button id="notif-btn" class="w-9 h-9 rounded-lg border border-slate-200 text-slate-600 hover:text-teal-600 hover:border-slate-300 flex items-center justify-center transition relative">
+                            <i class="fa-regular fa-bell text-sm"></i>
+                            <span id="notif-count" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center">0</span>
+                        </button>
+                        
+                        <div id="notif-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-slate-100 z-50 overflow-hidden">
+                            <div class="p-3.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-800 uppercase tracking-wider">Hospital Alerts</span>
+                                <button id="mark-all-read" class="text-[11px] text-teal-600 hover:underline font-medium">Mark all read</button>
+                            </div>
+                            <div id="notif-list" class="max-h-72 overflow-y-auto divide-y divide-slate-100"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 pl-2 border-l border-slate-200">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' rx='20' fill='%230d9488'/><text x='50%' y='54%' font-size='34' font-family='Arial,sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'>JF</text></svg>" alt="Dr. Jahid Farhaan" class="w-8 h-8 rounded-full object-cover ring-2 ring-teal-500/20">
+                        <div class="hidden xl:block text-left">
+                            <p class="text-xs font-bold text-slate-800 leading-none">Dr. Jahid Farhaan</p>
+                            <span class="text-[10px] text-slate-400 font-medium">Chief Medical Officer</span>
+                        </div>
+                    </div>
+
+                    <button id="mobile-menu-btn" class="md:hidden w-9 h-9 rounded-lg border border-slate-200 text-slate-600 flex items-center justify-center">
+                        <i class="fa-solid fa-bars text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-1">
+            <a href="index.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Dashboard</a>
+            <a href="patients.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Patients Directory</a>
+            <a href="appointments.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Appointments</a>
+            <a href="records.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">EHR & Prescriptions</a>
+            <a href="billing.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Billing & Claims</a>
+            <a href="doctors.html" class="nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Doctors & Staff</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+
+        <!-- Page Header & Action Bar -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-1">
+                    <a href="index.html" class="hover:text-teal-600">Home</a>
+                    <span>/</span>
+                    <span class="text-teal-600 font-bold">Patient Registry</span>
+                </div>
+                <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Patient Directory & Admissions</h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Manage patient demographics, admissions, primary care doctors, and vital summaries.</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button onclick="openModal('add-patient-modal')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm transition shadow-lg shadow-teal-600/20">
+                    <i class="fa-solid fa-user-plus text-xs"></i>
+                    <span>Register New Patient</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Summary Mini Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Total Enrolled</span>
+                    <p id="total-count-badge" class="text-2xl font-extrabold text-slate-900 mt-0.5">0</p>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-amber-500">Inpatients (Admitted)</span>
+                    <p id="inpatient-count-badge" class="text-2xl font-extrabold text-slate-900 mt-0.5">0</p>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-bed"></i>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-teal-600">Outpatients</span>
+                    <p id="outpatient-count-badge" class="text-2xl font-extrabold text-slate-900 mt-0.5">0</p>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-person-walking"></i>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-500">Discharged</span>
+                    <p id="discharged-count-badge" class="text-2xl font-extrabold text-slate-900 mt-0.5">0</p>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <div class="relative flex-1">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                <input type="text" id="patient-search-input" placeholder="Search by name, ID (e.g. PT-8021), phone or blood group..." class="w-full pl-9 pr-4 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition">
+            </div>
+
+            <div class="flex items-center gap-2">
+                <!-- Department Filter -->
+                <select id="department-filter" class="px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <option value="">All Departments</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Internal Medicine">Internal Medicine</option>
+                    <option value="Dermatology">Dermatology</option>
+                </select>
+
+                <!-- Status Filter -->
+                <select id="status-filter" class="px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <option value="">All Statuses</option>
+                    <option value="Inpatient">Inpatient</option>
+                    <option value="Outpatient">Outpatient</option>
+                    <option value="Discharged">Discharged</option>
+                </select>
+
+                <button onclick="resetFilters()" class="p-2 text-slate-400 hover:text-slate-600 text-sm border border-slate-200 rounded-xl hover:bg-slate-50" title="Reset Filters">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Patients Master Table -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50/70 border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                            <th class="py-3.5 px-4">Patient Profile</th>
+                            <th class="py-3.5 px-4">Demographics</th>
+                            <th class="py-3.5 px-4">Department & Doctor</th>
+                            <th class="py-3.5 px-4">Vitals & Allergies</th>
+                            <th class="py-3.5 px-4">Admission</th>
+                            <th class="py-3.5 px-4">Status</th>
+                            <th class="py-3.5 px-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patients-table-body" class="divide-y divide-slate-100 text-sm">
+                        <!-- Populated dynamically via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="no-patients-found" class="hidden py-12 text-center">
+                <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3 text-lg">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3 class="text-sm font-bold text-slate-800">No matching patients found</h3>
+                <p class="text-xs text-slate-400 mt-1">Try adjusting your search criteria or register a new patient.</p>
+            </div>
+
+            <!-- Table Footer -->
+            <div class="p-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span id="showing-entries-label">Showing 6 registered patients</span>
+                <span class="text-slate-400">JahidPulse EHR Cloud Synchronized</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Register New Patient Modal -->
+    <div id="add-patient-modal" class="hidden fixed inset-0 z-50 overflow-y-auto modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">Register New Patient</h3>
+                    <p class="text-xs text-slate-500">Create permanent electronic health record file.</p>
+                </div>
+                <button onclick="closeModal('add-patient-modal')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Form -->
+            <form id="new-patient-form" onsubmit="handleCreatePatient(event)" class="mt-4 space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Full Name -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Legal Name *</label>
+                        <input type="text" name="name" required placeholder="e.g. Benjamin Hayes" class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+
+                    <!-- Date of Birth -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Date of Birth *</label>
+                        <input type="date" name="dob" required class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+
+                    <!-- Gender -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Gender *</label>
+                        <select name="gender" required class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Blood Group -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Blood Group *</label>
+                        <select name="bloodGroup" required class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Phone Number *</label>
+                        <input type="tel" name="phone" required placeholder="+1 (555) 000-0000" class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Email Address</label>
+                        <input type="email" name="email" placeholder="patient@example.com" class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+
+                    <!-- Assigned Doctor -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Assigned Doctor *</label>
+                        <select id="form-doctor-select" name="doctorId" required class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+
+                    <!-- Department -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Admission Status *</label>
+                        <select name="status" required class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                            <option value="Inpatient">Inpatient (Admitted)</option>
+                            <option value="Outpatient" selected>Outpatient</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Emergency Contact -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Emergency Contact (Name & Phone)</label>
+                    <input type="text" name="emergencyContact" placeholder="e.g. Mary Hayes (Spouse) - +1 (555) 345-6789" class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                </div>
+
+                <!-- Known Allergies -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Known Drug/Food Allergies (comma separated)</label>
+                    <input type="text" name="allergies" placeholder="e.g. Penicillin, Peanuts (or 'None')" class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                </div>
+
+                <!-- Initial Clinical Notes -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Initial Clinical Notes</label>
+                    <textarea name="notes" rows="2" placeholder="Presenting complaints, diagnosis notes, initial triage..." class="w-full px-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
+                </div>
+
+                <!-- Modal Actions -->
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('add-patient-modal')" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold text-xs sm:text-sm">Cancel</button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold text-xs sm:text-sm transition shadow-lg shadow-teal-600/20">Complete Registration</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-800">JahidPulse PMS</span> &bull; <span>Patient Registry Module</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="hover:text-teal-600">Dashboard</a>
+                <a href="appointments.html" class="hover:text-teal-600">Appointments</a>
+                <a href="records.html" class="hover:text-teal-600">EHR</a>
+                <a href="billing.html" class="hover:text-teal-600">Billing</a>
+                <a href="doctors.html" class="hover:text-teal-600">Doctors</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/store.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            populateDoctorSelect();
+            renderPatientsList();
+            setupFilterListeners();
+
+            // Check if action=new query param is present
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('action') === 'new') {
+                openModal('add-patient-modal');
+            }
+        });
+
+        function populateDoctorSelect() {
+            const store = window.JahidPulseStore || window.CarePulseStore;
+            const doctors = store.getDoctors();
+            const select = document.getElementById('form-doctor-select');
+            if (select) {
+                select.innerHTML = doctors.map(d => `
+                    <option value="${d.id}">${d.name} (${d.specialty})</option>
+                `).join('');
+            }
+        }
+
+        function renderPatientsList() {
+            const store = window.JahidPulseStore || window.CarePulseStore;
+            const patients = store.getPatients();
+            const searchVal = (document.getElementById('patient-search-input').value || '').toLowerCase().trim();
+            const deptVal = document.getElementById('department-filter').value;
+            const statusVal = document.getElementById('status-filter').value;
+
+            // Stats
+            document.getElementById('total-count-badge').textContent = patients.length;
+            document.getElementById('inpatient-count-badge').textContent = patients.filter(p => p.status === 'Inpatient').length;
+            document.getElementById('outpatient-count-badge').textContent = patients.filter(p => p.status === 'Outpatient').length;
+            document.getElementById('discharged-count-badge').textContent = patients.filter(p => p.status === 'Discharged').length;
+
+            const filtered = patients.filter(p => {
+                const matchesSearch = !searchVal || 
+                    p.name.toLowerCase().includes(searchVal) || 
+                    p.id.toLowerCase().includes(searchVal) || 
+                    p.phone.toLowerCase().includes(searchVal) ||
+                    (p.bloodGroup && p.bloodGroup.toLowerCase().includes(searchVal));
+
+                const matchesDept = !deptVal || p.department.toLowerCase().includes(deptVal.toLowerCase());
+                const matchesStatus = !statusVal || p.status === statusVal;
+
+                return matchesSearch && matchesDept && matchesStatus;
+            });
+
+            const tbody = document.getElementById('patients-table-body');
+            const noPatients = document.getElementById('no-patients-found');
+            const countLabel = document.getElementById('showing-entries-label');
+
+            countLabel.textContent = `Showing ${filtered.length} of ${patients.length} registered patients`;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                noPatients.classList.remove('hidden');
+                return;
+            }
+
+            noPatients.classList.add('hidden');
+            tbody.innerHTML = filtered.map(p => {
+                let badgeClass = 'badge-inpatient';
+                if (p.status === 'Outpatient') badgeClass = 'badge-outpatient';
+                if (p.status === 'Discharged') badgeClass = 'badge-discharged';
+
+                const initials = p.name.split(' ').map(n=>n[0]).join('');
+                const allergyList = Array.isArray(p.allergies) ? p.allergies.join(', ') : (p.allergies || 'None');
+
+                return `
+                    <tr class="table-hover-row border-b border-slate-100 transition">
+                        <td class="py-3.5 px-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-teal-100 text-teal-700 font-bold flex items-center justify-center text-xs shrink-0 border border-teal-200">
+                                    ${initials}
+                                </div>
+                                <div>
+                                    <a href="patient-details.html?id=${p.id}" class="font-bold text-slate-900 hover:text-teal-600 transition block leading-snug">
+                                        ${p.name}
+                                    </a>
+                                    <span class="text-xs text-slate-400 font-mono font-medium">${p.id}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <div class="text-xs">
+                                <span class="font-semibold text-slate-800">${p.age} yrs</span> &bull; 
+                                <span class="text-slate-500">${p.gender}</span>
+                                <div class="text-[11px] text-slate-500 mt-0.5">Blood: <span class="font-bold text-rose-600">${p.bloodGroup}</span></div>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <div class="text-xs font-semibold text-slate-800">${p.department}</div>
+                            <span class="text-[11px] text-slate-500">${p.doctorName}</span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <div class="text-xs">
+                                <span class="text-slate-700">BP: ${p.vitals ? p.vitals.bloodPressure : '120/80'}</span>
+                                <div class="text-[11px] text-amber-600 font-medium truncate max-w-[150px]" title="${allergyList}">
+                                    <i class="fa-solid fa-triangle-exclamation text-[10px]"></i> ${allergyList}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <div class="text-xs text-slate-600">${p.admissionDate || '2026-11-01'}</div>
+                            <span class="text-[11px] text-slate-400">${p.roomNumber || 'OPD'}</span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${badgeClass}">
+                                ${p.status}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right">
+                            <div class="flex items-center justify-end gap-1.5">
+                                <a href="patient-details.html?id=${p.id}" class="px-2.5 py-1 rounded-lg text-xs font-semibold text-teal-600 hover:bg-teal-50 transition border border-teal-200" title="View Full EHR Profile">
+                                    View Profile
+                                </a>
+                                <button onclick="deletePatientRecord('${p.id}', '${p.name}')" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg transition" title="Delete Patient Record">
+                                    <i class="fa-solid fa-trash-can text-xs"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function setupFilterListeners() {
+            document.getElementById('patient-search-input').addEventListener('input', renderPatientsList);
+            document.getElementById('department-filter').addEventListener('change', renderPatientsList);
+            document.getElementById('status-filter').addEventListener('change', renderPatientsList);
+        }
+
+        function resetFilters() {
+            document.getElementById('patient-search-input').value = '';
+            document.getElementById('department-filter').value = '';
+            document.getElementById('status-filter').value = '';
+            renderPatientsList();
+        }
+
+        function handleCreatePatient(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+
+            const doctorId = formData.get('doctorId');
+            const store = window.JahidPulseStore || window.CarePulseStore;
+            const doctor = store.getDoctor(doctorId);
+
+            const allergiesRaw = formData.get('allergies') || '';
+            const allergies = allergiesRaw.split(',').map(s => s.trim()).filter(Boolean);
+
+            const dob = formData.get('dob');
+            const birthYear = new Date(dob).getFullYear();
+            const age = new Date().getFullYear() - birthYear;
+
+            const newPatientData = {
+                name: formData.get('name'),
+                dob: dob,
+                age: age || 30,
+                gender: formData.get('gender'),
+                bloodGroup: formData.get('bloodGroup'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                emergencyContact: formData.get('emergencyContact'),
+                assignedDoctorId: doctorId,
+                doctorName: doctor ? doctor.name : 'Attending Physician',
+                department: doctor ? doctor.specialty : 'General Medicine',
+                status: formData.get('status'),
+                roomNumber: formData.get('status') === 'Inpatient' ? 'Room 204-B' : 'OPD',
+                allergies: allergies.length > 0 ? allergies : ['None known'],
+                chronicConditions: [],
+                notes: formData.get('notes') || 'Initial registration on intake.'
+            };
+
+            const created = store.addPatient(newPatientData);
+            closeModal('add-patient-modal');
+            form.reset();
+            renderPatientsList();
+            showToast(`Patient ${created.name} registered with ID ${created.id}`, 'success', 'Registration Complete');
+        }
+
+        function deletePatientRecord(id, name) {
+            if (confirm(`Are you sure you want to remove medical record for ${name} (${id})?`)) {
+                const store = window.JahidPulseStore || window.CarePulseStore;
+                store.deletePatient(id);
+                renderPatientsList();
+                showToast(`Record for ${name} removed`, 'info', 'Deleted');
+            }
+        }
+    </script>
+</body>
+</html>

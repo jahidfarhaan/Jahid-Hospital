@@ -1,0 +1,25 @@
+{
+  "name": "jahidpulse-pms",
+  "version": "1.0.0",
+  "description": "JahidPulse - Care and Patient Management System (Full-Stack Express + MySQL & Standalone Dashboard)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test_verification.js"
+  },
+  "keywords": [
+    "jahidpulse",
+    "hospital-management",
+    "patient-management-system",
+    "express",
+    "mysql",
+    "healthcare-ehr"
+  ],
+  "author": "Dr. Jahid Farhaan & Team",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql8": "^2.19.0"
+  }
+}
